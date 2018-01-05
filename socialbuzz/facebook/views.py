@@ -12,6 +12,8 @@ from fb_data_collector import FacebookPostsCollector
 from fb_data_collector import FacebookCommentsCollector
 import json, codecs
 
+from django.shortcuts import render
+
 # Create your views here.
 
 class FacebookPageCreate(CreateView):
@@ -40,21 +42,22 @@ class FacebookPageDelete(DeleteView):
 class FacebookPageShow(DetailView):
 	model = FacebookPage
 	template_name = 'pages/page_show.html'
+
     #below, client_id and client_secret should be your actual client ID and secret
-    app_id = "1113647168736591"
+	app_id = "1113647168736591"
 	client_secret = "567c460931e1bbb017932b9361fd877a"
 
-    fb_auth = FacebookAuthenticator(app_id,client_secret)
-    fb_access_token = fb_auth.request_access_token()
+	fb_auth = FacebookAuthenticator(app_id,client_secret)
+	fb_access_token = fb_auth.request_access_token()
 
-    #to get page posts
-    posts_collector = FacebookPostsCollector(fb_access_token)
-    posts = posts_collector.collect("barackobama",max_rows=100)
+	#to get page posts
+	posts_collector = FacebookPostsCollector(fb_access_token)
+	posts = posts_collector.collect("barackobama",max_rows=100)
 
-    #to get comments on a single post
-    comments_collector = FacebookCommentsCollector(fb_access_token)
-    post_id = "6815841748_10155375836346749"
+	#to get comments on a single post
+	comments_collector = FacebookCommentsCollector(fb_access_token)
+	post_id = "6815841748_10155375836346749"
 
-    comments = comments_collector.collect(post_id,max_rows=100)
-    results = json.dumps(posts)
-    render(request, "pages/pages_show.html", {'results':results})
+	comments = comments_collector.collect(post_id,max_rows=100)
+	results = json.dumps(posts)
+	render("pages/pages_show.html", {'results':results})

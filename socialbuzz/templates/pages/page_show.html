@@ -8,8 +8,8 @@
 <p><strong>Created at: </strong>{{ object.created_at }} </p>
 
 <a class= "btn btn-success" href="{% url 'facebook:list_page' %}">Ok</a>
-<a class= "btn btn-primary" href="{% url 'facebook:update_page' object.page_id%}">Update</a>
-<a class="btn btn-danger" href="{% url 'facebook:delete_page' object.page_id %}">Delete</a>
+<a class= "btn btn-primary" href="{% url 'facebook:update_page' pk=object.pk %}">Update</a>
+<a class="btn btn-danger" href="{% url 'facebook:delete_page' pk=object.pk %}">Delete</a>
 
 <h1>Posts</h1>
 <pre id="obj">
