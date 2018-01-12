@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from .views import FacebookPageCreate, FacebookPageList, FacebookPageDelete, FacebookPageUpdate,FacebookPageShow
+from .views import FacebookPageCreate, FacebookPageList, FacebookPageDelete, FacebookPageUpdate, FacebookPageShow
 
 urlpatterns = [
     url(r'^new/', FacebookPageCreate.as_view(), name='new_page'),
