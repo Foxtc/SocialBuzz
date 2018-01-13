@@ -35,7 +35,7 @@ class FacebookPageUpdate(UpdateView):
 class FacebookPageDelete(DeleteView):
 	model = FacebookPage
 	template_name = 'page_delete.html'
-	success_url = reverse_lazy('facebook:list_page')
+	success_url = reverse_lazy('facebook:new_page')
 
 class FacebookPageShow(DetailView):
 	model = FacebookPage

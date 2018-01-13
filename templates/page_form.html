@@ -16,9 +16,9 @@
       <tr>
         <td>{{pages.url}}</td>
         <td align="right">
-          <a class="btn btn-secondary btn-sm">Show</a>
-          <a class="btn btn-primary btn-sm">Update</a>
-          <a class="btn btn-danger btn-sm">Delete</a>
+          <a class="btn btn-secondary btn-sm" href="{% url 'facebook:show_page' pk=pages.pk %}">Show</a>
+          <a class="btn btn-primary btn-sm" href="{% url 'facebook:update_page' pk=pages.pk %}">Update</a>
+          <a class="btn btn-danger btn-sm" href="{% url 'facebook:delete_page' pk=pages.pk %}">Delete</a>
         </td>
       </tr>
       {% endfor %}

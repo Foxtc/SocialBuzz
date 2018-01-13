@@ -3,19 +3,45 @@
 {% if object_list %}
 <center><h3 style="margin:10px">Post list</h3></center>
 <table class="table">
-	<thead class="table-active">
+	<thead class="table-dark">
 		<tr>
-			<th>Page</th>
+			<th>Id</th>
+			<th>Person</th>
+			<th>Message</th>
+			<th>Picture</th>
+			<th>Link</th>
 			<th>Name</th>
-			<th>Url</th>
-			<th>Created at</th>
-			<th>Actions</th>
-		</tr>
+			<th>Description</th>
+			<th>Type</th>
+			<th>Created time</th>
+			<th>Shares</th>
+			<th>Likes</th>
+			<th>Love</th>
+			<th>Wow</th>
+			<th>Haha</th>
+			<th>Sad</th>
+			<th>Angry</th>
+			</tr>
 	</thead>
 	<tbody>
 		{% for post in object_list %}
 		<tr>
-			<td>cona</td>
+			<td>{{post.id}}</td>
+			<td>{{post.person.name}}</td>
+			<td>{{post.message}}</td>
+			<td><img src={{post.picture}}/></td>
+			<td>{{post.link}}</td>
+			<td>{{post.name}}</td>
+			<td>{{post.description}}</td>
+			<td>{{post.type}}</td>
+			<td>{{post.created_time}}</td>
+			<td>{{post.shares}}</td>
+			<td>{{post.likes}}</td>
+			<td>{{post.love}}</td>
+			<td>{{post.wow}}</td>
+			<td>{{post.haha}}</td>
+			<td>{{post.sad}}</td>
+			<td>{{post.angry}}</td>
 		</tr>
 		{% endfor %}
 	</tbody>

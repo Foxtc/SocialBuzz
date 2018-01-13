@@ -11,19 +11,5 @@
 <a class= "btn btn-primary" href="{% url 'facebook:update_page' pk=object.pk %}">Update</a>
 <a class="btn btn-danger" href="{% url 'facebook:delete_page' pk=object.pk %}">Delete</a>
 
-<!--
-<pre id="obj">
-  <script>
-    var obj = document.getElementById('obj');
-    var jsonObject = JSON.parse('{{ results | escapejs }}');
-    //var jsonStr = JSON.stringify(jsonObject, undefined, 2);
 
-    for(var i=0;i<jsonObject.length;i++)
-      for(var keys in jsonObject[i]){
-        console.log(keys +"--»"+jsonObject[i][keys]);
-        obj.innerHTML = obj.innerHTML + "<br/>"+ keys +"--»"+jsonObject[i][keys];
-      }
-  </script>
-</pre>
--->
 {% endblock %}
