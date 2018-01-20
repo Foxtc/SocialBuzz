@@ -3,40 +3,53 @@ from django.views.generic import CreateView, ListView, DeleteView, UpdateView
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic.detail import DetailView
 
-from .models import FacebookPage
-from .forms import FacebookPageForm
-from .models import Post
+from .models import FacebookNewPage, FacebookNewPost, Comment, Post
+from .forms import FacebookPageForm, FacebookPostForm
 
-# Create your views here.
 
-class FacebookPageCreate(CreateView, ListView):
-	model = FacebookPage
+class FacebookPageSearch(CreateView, ListView):
+	model = FacebookNewPage
 	form_class = FacebookPageForm
-	template_name = 'page_form.html'
-	success_url = reverse_lazy('facebook:new_page')
+	form_prefix = 'page_form'
+	template_name = 'home.html'
+	success_url = reverse_lazy('facebook:new_search')
 
+	'''
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		context['pages'] = FacebookPage.objects.all()
 		return context
+	'''
+class FacebookPostSearch(CreateView, ListView):
+	model = FacebookNewPost
+	form_class = FacebookPostForm
+	for_prefix = 'post_form'
+	template_name = 'home.html'
+	success_url = reverse_lazy('facebook:new_search')
 
-class FacebookPageList(ListView):
+class FacebookPostList(ListView):
 	model = Post
 	queryset = Post.objects.order_by('id')
-	template_name = 'page_list.html'
+	template_name = 'post_list.html'
+	paginate_by = 10
+
+class FacebookCommentList(ListView):
+	model = Comment
+	queryset = Comment.objects.order_by('id')
+	template_name = 'comment_list.html'
 	paginate_by = 10
 
 class FacebookPageUpdate(UpdateView):
-	model = FacebookPage
+	model = FacebookNewPage
 	form_class = FacebookPageForm
-	template_name = 'page_form.html'
-	success_url = reverse_lazy('facebook:list_page')
+	template_name = 'home.html'
+	success_url = reverse_lazy('facebook:list_post')
 
 class FacebookPageDelete(DeleteView):
-	model = FacebookPage
-	template_name = 'page_delete.html'
-	success_url = reverse_lazy('facebook:new_page')
+	model = FacebookNewPage
+	template_name = 'delete.html'
+	success_url = reverse_lazy('facebook:new_search')
 
 class FacebookPageShow(DetailView):
-	model = FacebookPage
-	template_name = 'page_show.html'
+	model = FacebookNewPage
+	template_name = 'show.html'

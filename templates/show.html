@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<p><strong>Url: </strong>{{ object.url }} </p>
+<p><strong>Created at: </strong>{{ object.created_at }} </p>
+
+<a class= "btn btn-success" href="{% url 'facebook:list_post' %}">Ok</a>
+<a class= "btn btn-primary" href="{% url 'facebook:update' pk=object.pk %}">Update</a>
+<a class="btn btn-danger" href="{% url 'facebook:delete' pk=object.pk %}">Delete</a>
+
+
+{% endblock %}

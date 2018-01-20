@@ -12,9 +12,10 @@ fb_auth = FacebookAuthenticator(app_id,client_secret)
 fb_access_token = fb_auth.request_access_token()
 
 #to get page posts
-posts_collector = FacebookPostsCollector(fb_access_token, output_file="bla")
+posts_collector = FacebookPostsCollector(fb_access_token)
 posts = posts_collector.collect("barackobama",max_rows=100)
 
+#put posts int the db
 def sqlite_insert(conn, table, row):
     cols = ', '.join('"{}"'.format(col) for col in row.keys())
     vals = ', '.join(':{}'.format(col) for col in row.keys())
@@ -23,6 +24,7 @@ def sqlite_insert(conn, table, row):
     conn.commit()
 
 conn = sqlite3.connect('../db.sqlite3')
+
 for item in posts:
     #sqlite_insert(conn, item)
     person = item['from']
@@ -36,6 +38,15 @@ for item in posts:
     sqlite_insert(conn,"facebook_post",item)
 
 #to get comments on a single post
-#comments_collector = FacebookCommentsCollector(fb_access_token)
-#post_id = "6815841748_10155375836346749"
-#comments = comments_collector.collect(post_id,max_rows=100)
+comments_collector = FacebookCommentsCollector(fb_access_token)
+post_id = "6815841748_10155375836346749"
+comments = comments_collector.collect(post_id,max_rows=100)
+
+#put comments in the db
+for item in comments:
+    #sqlite_insert(conn, item)
+    person = item['from']
+    del item['from']
+    item['person_id'] = person['id']
+    sqlite_insert(conn,"facebook_person",person)
+    sqlite_insert(conn,"facebook_comment",item)

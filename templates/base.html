@@ -10,8 +10,6 @@
 	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 	<script src="{% static 'js/jquery-2.2.4.min.js' %}"></script>
 	<script src="{% static 'js/bootstrap.min.js' %}"></script>
-	<script src="{% static 'js/socialbuzz.js' %}"></script>
-	<link rel="stylesheet" href="{% static 'css/socialbuzz.css' %}">
 	<title>{% block title %}SocialBuzz {% endblock %}</title>
 </head>
 <body>
@@ -20,15 +18,15 @@
 		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 			<div class="container-fluid">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="{% url 'facebook:new_page' %}">SocialBuzz</a>
+					<a class="navbar-brand" href="{% url 'facebook:new_search' %}">SocialBuzz</a>
 				</div>
 				<div class="collapse navbar-collapse" id="navbarColor01">
 					<ul class="nav navbar-nav">
 						<li class="dropdown">
 							<a href="#" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">Followed content<span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu" aria-labelledby="navbarColor01">
-								<li><a class="dropdown-item" href="{% url 'facebook:new_page' %}">Pages</a></li>
-								<li><a class="dropdown-item" href="{% url 'facebook:list_page' %}">Posts</a></li>
+								<li><a class="dropdown-item" href="{% url 'facebook:list_post' %}">Pages</a></li>
+								<li><a class="dropdown-item" href="{% url 'facebook:list_comment' %}">Posts</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -43,12 +41,5 @@
 		{% block footer %}
 		{% endblock %}
 	</div>
-	<!--
-	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-	<script src="{% static 'js/bootstrap.min.js' %}"></script>
-
-	{% block extrajs %}
-	{% endblock %}
--->
 </body>
 </html>
