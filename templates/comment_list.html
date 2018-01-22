@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
 {% if object_list %}
-<center><h3 style="margin:10px">Comment list - {{object_list.person.name}}</h3></center>
+<center><h3 style="margin:10px">Comment list</h3></center>
 <table class="table">
 	<thead class="table-dark">
 		<tr>
 			<th>Id</th>
+			<th>Name</th>
 			<th>Message</th>
 			<th>Created time</th>
 			<th>Likes</th>
@@ -20,6 +21,7 @@
 		{% for comment in object_list %}
 		<tr>
 			<td>{{comment.id}}</td>
+			<td>{{comment.person.name}}</td>
 			<td>{{comment.message}}</td>
 			<td>{{comment.created_time}}</td>
 			<td>{{comment.like_count}}</td>

@@ -1,31 +1,22 @@
-from django.shortcuts import render
-from django.views.generic import CreateView, ListView, DeleteView, UpdateView
+from django.views.generic import CreateView, ListView, DeleteView, UpdateView, FormView
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic.detail import DetailView
 
 from .models import FacebookNewPage, FacebookNewPost, Comment, Post
 from .forms import FacebookPageForm, FacebookPostForm
 
-
 class FacebookPageSearch(CreateView, ListView):
 	model = FacebookNewPage
 	form_class = FacebookPageForm
-	form_prefix = 'page_form'
 	template_name = 'home.html'
 	success_url = reverse_lazy('facebook:new_search')
 
-	'''
-	def get_context_data(self, **kwargs):
-		context = super().get_context_data(**kwargs)
-		context['pages'] = FacebookPage.objects.all()
-		return context
-	'''
 class FacebookPostSearch(CreateView, ListView):
 	model = FacebookNewPost
 	form_class = FacebookPostForm
-	for_prefix = 'post_form'
 	template_name = 'home.html'
-	success_url = reverse_lazy('facebook:new_search')
+	#success_url = reverse_lazy('facebook:new_search')
+
 
 class FacebookPostList(ListView):
 	model = Post
