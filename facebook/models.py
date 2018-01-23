@@ -3,10 +3,14 @@ from django.db import models
 # Create your models here.
 class FacebookNewPage(models.Model):
     url = models.CharField(blank=True, max_length=100)
+    pages_count = models.PositiveIntegerField(default=0, editable=False)
+    since_id = models.BigIntegerField(default=0,editable=False)
     created_at = models.DateTimeField(auto_now=True)
 
 class FacebookNewPost(models.Model):
     url = models.CharField(blank=True, max_length=100)
+    posts_count = models.PositiveIntegerField(default=0, editable=False)
+    since_id = models.BigIntegerField(default=0,editable=False)
     created_at = models.DateTimeField(auto_now=True)
 
 class Person(models.Model):

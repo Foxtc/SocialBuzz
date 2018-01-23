@@ -32,8 +32,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'facebook',
-    #'django_tables2',
-    #'crudbuilder',
     'djcelery',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -126,8 +124,8 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
-# django celery settings
-BROKER_URL = 'redis://localhost:8000/0'
-
 import djcelery
 djcelery.setup_loader()
+
+# django celery settings
+BROKER_URL = 'redis://127.0.0.1:8000/0'

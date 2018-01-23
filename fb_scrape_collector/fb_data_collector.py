@@ -24,7 +24,7 @@ import unicodedata
 import json
 import pandas as pd
 
-import utils
+from . import utils
 
 # 60 seconds timeout
 socket.setdefaulttimeout(60)
