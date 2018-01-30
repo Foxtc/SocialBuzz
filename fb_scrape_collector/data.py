@@ -12,8 +12,8 @@ fb_auth = FacebookAuthenticator(app_id,client_secret)
 fb_access_token = fb_auth.request_access_token()
 
 #to get page posts
-posts_collector = FacebookPostsCollector(fb_access_token)
-posts = posts_collector.collect("barackobama",max_rows=100)
+posts_collector = FacebookPostsCollector(fb_access_token, output_file="cdu")
+posts = posts_collector.collect("CDU",max_rows=100)
 
 #put posts int the db
 def sqlite_insert(conn, table, row):

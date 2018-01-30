@@ -3,22 +3,27 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic.detail import DetailView
 
 from .models import FacebookNewPage, FacebookNewPost, Comment, Post
-from .forms import FacebookPageForm, FacebookPostForm
+from .forms import FacebookPageForm, FacebookPostForm, HomeForm
 
 from django.shortcuts import render
+
+class Home():
+	form_class = HomeForm
+	success_url = reverse_lazy('facebook:home')
 
 class FacebookPageSearch(CreateView, ListView):
 	model = FacebookNewPage
 	form_class = FacebookPageForm
 	template_name = 'home.html'
-	success_url = reverse_lazy('facebook:new_search')
-
+	success_url = reverse_lazy('facebook:new_page')
+	context_object_name = 'page_new'
 
 class FacebookPostSearch(CreateView, ListView):
 	model = FacebookNewPost
 	form_class = FacebookPostForm
 	template_name = 'home.html'
-	#success_url = reverse_lazy('facebook:new_search')
+	success_url = reverse_lazy('facebook:new_post')
+	context_object_name = 'post_list'
 
 class FacebookPostList(ListView):
 	model = Post

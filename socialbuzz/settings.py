@@ -27,12 +27,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
     'facebook',
     'djcelery',
+    'django_celery_results',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -114,7 +114,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = False
+USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
@@ -128,4 +128,6 @@ import djcelery
 djcelery.setup_loader()
 
 # django celery settings
-BROKER_URL = 'redis://127.0.0.1:8000/0'
+BROKER_URL = 'redis://127.0.0.1:6379'
+#CELERY_ALWAYS_EAGER = True
+CELERY_RESULT_BACKEND = 'db+sqlite:///django-db'
