@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
-{% if object_list %}
-<center><h3 style="margin:10px">Post list - {{object_list.person.name}}</h3></center>
+{% if posts %}
+<center><h3 style="margin:10px">Posts</h3></center>
 <table class="table">
 	<thead class="table-dark">
 		<tr>
@@ -23,11 +23,11 @@
 			</tr>
 	</thead>
 	<tbody>
-		{% for post in object_list %}
+		{% for post in posts %}
 		<tr>
 			<td>{{post.id}}</td>
 			<td>{{post.message}}</td>
-			<td><img src={{post.picture}}/></td>
+			<td><img src="{{post.picture}}"/></td>
 			<td>{{post.link}}</td>
 			<td>{{post.name}}</td>
 			<td>{{post.description}}</td>

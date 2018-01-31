@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Followed Posts</h1>
-<form method="post">
+<h1>Followed Posts</h1></p>
+<form method="post" class="form-inline" style="width: 80%;">
   {% csrf_token %}
   {{ form.url }}
-  <button class="btn btn-success" type="submit">Add</button>
-</form>
+  <button class="btn btn-success" type="submit" style="width: 13%;">Add</button>
+</form></p>
 <table class="table table-hover">
   <thead class="table-dark">
     <tr>
@@ -21,8 +21,8 @@
     <td>{{posts.created_at}}</td>
     <td align="right">
       <a class="btn btn-secondary btn-sm" href="{% url 'facebook:show_post' pk=posts.pk %}">Show</a>
-      <a class="btn btn-primary btn-sm" href="{% url 'facebook:update' pk=posts.pk %}">Update</a>
-      <a class="btn btn-danger btn-sm" href="{% url 'facebook:delete' pk=posts.pk %}">Delete</a>
+      <a class="btn btn-primary btn-sm" href="{% url 'facebook:show_post' pk=posts.pk %}">Update</a>
+      <a class="btn btn-danger btn-sm" href="{% url 'facebook:delete_post' pk=posts.pk %}">Delete</a>
     </td>
   </tr>
   {% endfor %}

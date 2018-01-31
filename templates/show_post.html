@@ -1,19 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
-{% if object_list %}
-<center><h3 style="margin:10px">Post list - {{object_list.person.name}}</h3></center>
+{% if comments %}
+<center><h3 style="margin:10px">Comments</h3></center>
 <table class="table">
 	<thead class="table-dark">
 		<tr>
 			<th>Id</th>
-			<th>Message</th>
-			<th>Picture</th>
-			<th>Link</th>
 			<th>Name</th>
-			<th>Description</th>
-			<th>Type</th>
+			<th>Message</th>
 			<th>Created time</th>
-			<th>Shares</th>
 			<th>Likes</th>
 			<th>Love</th>
 			<th>Wow</th>
@@ -23,23 +18,18 @@
 			</tr>
 	</thead>
 	<tbody>
-		{% for post in object_list %}
+		{% for comment in comments %}
 		<tr>
-			<td>{{post.id}}</td>
-			<td>{{post.message}}</td>
-			<td><img src={{post.picture}}/></td>
-			<td>{{post.link}}</td>
-			<td>{{post.name}}</td>
-			<td>{{post.description}}</td>
-			<td>{{post.type}}</td>
-			<td>{{post.created_time}}</td>
-			<td>{{post.shares}}</td>
-			<td>{{post.likes}}</td>
-			<td>{{post.love}}</td>
-			<td>{{post.wow}}</td>
-			<td>{{post.haha}}</td>
-			<td>{{post.sad}}</td>
-			<td>{{post.angry}}</td>
+			<td>{{comment.id}}</td>
+			<td>{{comment.person.name}}</td>
+			<td>{{comment.message}}</td>
+			<td>{{comment.created_time}}</td>
+			<td>{{comment.like_count}}</td>
+			<td>{{comment.love}}</td>
+			<td>{{comment.wow}}</td>
+			<td>{{comment.haha}}</td>
+			<td>{{comment.sad}}</td>
+			<td>{{comment.angry}}</td>
 		</tr>
 		{% endfor %}
 	</tbody>

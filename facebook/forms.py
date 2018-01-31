@@ -1,6 +1,6 @@
 from django import forms
 from .models import FacebookNewPage, FacebookNewPost
-from .tasks import collect_search
+from .tasks import collect_page, collect_post
 
 class FacebookPageForm(forms.ModelForm):
 	class Meta:
@@ -12,7 +12,7 @@ class FacebookPageForm(forms.ModelForm):
 			'created_at': forms.SelectDateWidget(attrs={'class':'form-control'}),
 		}
 	def run_task(self):
-		collect_search.delay(self.cleaned_data['url'])
+		collect_page.delay(self.cleaned_data['url'])
 
 class FacebookPostForm(forms.ModelForm):
 	class Meta:
@@ -23,3 +23,5 @@ class FacebookPostForm(forms.ModelForm):
 			'url': forms.TextInput(attrs={'class':'form-control col-md-9','placeholder':'Post_ID/URL'}),
 			'created_at': forms.SelectDateWidget(attrs={'class':'form-control'}),
 		}
+	def run_task(self):
+		collect_post.delay(self.cleaned_data['url'])

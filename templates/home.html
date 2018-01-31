@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container">
+<div class="container" style='margin:0 50%;position:relative;left:-50px;'>
+</p>
 <h2>Search type</h2>
-<a class="btn btn-success btn-lg" href="{% url 'facebook:new_page' %}">Page</a>
+<br>
+<a style='margin:0 1%;' class="btn btn-success btn-lg" href="{% url 'facebook:new_page' %}">Page</a>
 <a class="btn btn-info btn-lg" href="{% url 'facebook:new_post' %}">Post</a>
 </div>
 {% endblock %}

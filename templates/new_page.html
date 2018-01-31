@@ -1,35 +1,33 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Followed Pages</h1>
-<form method="post" >
+<h1>Followed Pages</h1></p>
+<form method="post" class="form-inline" style="width: 80%;">
   {% csrf_token %}
-  <span style="display: inline;">
   {{ form.url }}
-  <button class="btn btn-success" type="submit">Add</button>
-  </span>
-</form>
+  <button class="btn btn-success" type="submit" style="width: 13%;">Add</button>
+</form></p>
 <table class="table table-hover">
   <thead class="table-dark">
 		<tr>
 			<th>ID/URL</th>
-			<th>Pages number</th>
 			<th>Created time</th>
 		</tr>
 	</thead>
   <tbody>
+  {% if object_list %}
   {% for pages in object_list %}
   <tr>
     <td>{{pages.url}}</td>
-    <td>{{pages.pages_count}}</td>
     <td>{{pages.created_at}}</td>
     <td align="right">
       <a class="btn btn-secondary btn-sm" href="{% url 'facebook:show_page' pk=pages.pk %}">Show</a>
-      <a class="btn btn-primary btn-sm" href="{% url 'facebook:update' pk=pages.pk %}">Update</a>
-      <a class="btn btn-danger btn-sm" href="{% url 'facebook:delete' pk=pages.pk %}">Delete</a>
+      <a class="btn btn-primary btn-sm" href="{% url 'facebook:update_page' pk=pages.pk %}">Update</a>
+      <a class="btn btn-danger btn-sm" href="{% url 'facebook:delete_page' pk=pages.pk %}">Delete</a>
     </td>
   </tr>
   {% endfor %}
+  {% endif %}
 </tbody>
 </table>
 {% endblock %}

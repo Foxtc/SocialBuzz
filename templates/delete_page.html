@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<form method="post">
+		{% csrf_token %}
+		<h3>Are you sure you want to delete {{ object.url }}?</h3>
+		<button class="btn btn-danger" type="submit">Yes</button>
+		<a class= "btn btn-default" href="{% url 'facebook:new_page' %}">No</a>
+	</form>
+{% endblock %}

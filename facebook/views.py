@@ -6,8 +6,8 @@ from .models import FacebookNewPage, FacebookNewPost, Comment, Post
 from .forms import FacebookPageForm, FacebookPostForm
 
 from django.shortcuts import render
-from .tasks import collect_search
 from django.http import HttpResponseRedirect
+from .tasks import collect_page
 
 class HomeView(TemplateView):
 	template_name = "home.html"
@@ -20,7 +20,6 @@ class FacebookPageSearch(CreateView, ListView):
 	success_url = reverse_lazy('facebook:new_page')
 	def form_valid(self, form):
 		self.object = form.save()
-		#collect_search(form.widgets['url'])
 		form.run_task()
 		return HttpResponseRedirect(self.get_success_url())
 
@@ -31,7 +30,6 @@ class FacebookPostSearch(CreateView, ListView):
 	success_url = reverse_lazy('facebook:new_post')
 	def form_valid(self, form):
 		self.object = form.save()
-		#collect_search(form.widgets['url'])
 		form.run_task()
 		return HttpResponseRedirect(self.get_success_url())
 
@@ -50,18 +48,51 @@ class FacebookCommentList(ListView):
 class FacebookPageUpdate(UpdateView):
 	model = FacebookNewPage
 	form_class = FacebookPageForm
-	template_name = 'home.html'
-	success_url = reverse_lazy('facebook:list_post')
+	template_name = 'show_page.html'
+	success_url = reverse_lazy('facebook:update_page')
+
+	def get_context_data(self, **kwargs):
+		context = super(FacebookPageUpdate, self).get_context_data(**kwargs)
+		update_page = Post.objects.filter(page=self.kwargs.get('pk'))
+		#collect_page(update_page.url)
+		return context
+
+class FacebookPostUpdate(UpdateView):
+	model = FacebookNewPost
+	form_class = FacebookPostForm
+	template_name = 'show_post.html'
+	#success_url = reverse_lazy('facebook:list_post')
 
 class FacebookPageDelete(DeleteView):
 	model = FacebookNewPage
-	template_name = 'delete.html'
-	success_url = reverse_lazy('facebook:new_search')
+	template_name = 'delete_page.html'
+	success_url = reverse_lazy('facebook:new_page')
+	def get_context_data(self, **kwargs):
+		context = super(FacebookPageDelete, self).get_context_data(**kwargs)
+		context['posts']=Post.objects.filter(page=self.kwargs.get('pk'))
+		return context
+
+class FacebookPostDelete(DeleteView):
+	model = FacebookNewPost
+	template_name = 'delete_post.html'
+	success_url = reverse_lazy('facebook:new_post')
+	def get_context_data(self, **kwargs):
+		context = super(FacebookPostDelete, self).get_context_data(**kwargs)
+		context['comments']=Comment.objects.filter(page=self.kwargs.get('pk'))
+		return context
 
 class FacebookPageShow(DetailView):
 	model = FacebookNewPage
 	template_name = 'show_page.html'
+	def get_context_data(self, **kwargs):
+		context = super(FacebookPageShow, self).get_context_data(**kwargs)
+		context['posts']=Post.objects.filter(page=self.kwargs.get('pk'))
+		return context
 
 class FacebookPostShow(DetailView):
 	model = FacebookNewPost
 	template_name = 'show_post.html'
+	def get_context_data(self, **kwargs):
+		context = super(FacebookPostShow, self).get_context_data(**kwargs)
+		context['comments']=Comment.objects.filter(page=self.kwargs.get('pk'))
+		return context

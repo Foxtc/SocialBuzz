@@ -3,15 +3,13 @@ from django.db import models
 # Create your models here.
 class FacebookNewPage(models.Model):
     url = models.CharField(blank=True, max_length=100)
-    pages_count = models.PositiveIntegerField(default=0, editable=False)
-    since_id = models.BigIntegerField(default=0,editable=False)
     created_at = models.DateTimeField(auto_now=True)
+    id = models.IntegerField(primary_key=True)
 
 class FacebookNewPost(models.Model):
     url = models.CharField(blank=True, max_length=100)
-    posts_count = models.PositiveIntegerField(default=0, editable=False)
-    since_id = models.BigIntegerField(default=0,editable=False)
     created_at = models.DateTimeField(auto_now=True)
+    id = models.IntegerField(primary_key=True)
 
 class Person(models.Model):
     name = models.CharField(max_length=100)
@@ -34,6 +32,7 @@ class Post(models.Model):
     sad = models.IntegerField()
     angry = models.IntegerField()
     id = models.CharField(max_length=256, primary_key=True)
+    page = models.ForeignKey(FacebookNewPage)
 
 
 class Comment(models.Model):
@@ -48,3 +47,4 @@ class Comment(models.Model):
     sad = models.IntegerField()
     angry = models.IntegerField()
     id = models.CharField(max_length=256, primary_key=True)
+    post = models.ForeignKey(FacebookNewPost)
