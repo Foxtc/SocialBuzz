@@ -1,39 +1,35 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="border row">
-    <h1>Followed Pages</h1>
-    <form method="post" class="form my-2 my-lg-1">
-      {% csrf_token %}
-      <div class="row mx-0">
-      {{ form.url }}
-      <button class="btn btn-success ml-4 col-md-2" type="submit">Add</button>
-    </div>
-    </form>
-    <table class="table table-hover my-2">
-      <thead class="table-dark">
-        <!--
-    		<tr>
-    			<th>ID/URL</th>
-    			<th>Pages number</th>
-    			<th>Created time</th>
-    		</tr>
-      -->
-    	</thead>
-      <tbody>
-      {% for pages in object_list %}
-      <tr>
-        <td>{{pages.url}}</td>
-        <td>{{pages.pages_count}}</td>
-        <td align="right">
-          <a class="btn btn-secondary btn-sm" href="{% url 'facebook:show' pk=pages.pk %}">Show</a>
-          <a class="btn btn-primary btn-sm" href="{% url 'facebook:update' pk=pages.pk %}">Update</a>
-          <a class="btn btn-danger btn-sm" href="{% url 'facebook:delete' pk=pages.pk %}">Delete</a>
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-    </table>
-</div>
-
+<h1>Followed Pages</h1>
+<form method="post" >
+  {% csrf_token %}
+  <span style="display: inline;">
+  {{ form.url }}
+  <button class="btn btn-success" type="submit">Add</button>
+  </span>
+</form>
+<table class="table table-hover">
+  <thead class="table-dark">
+		<tr>
+			<th>ID/URL</th>
+			<th>Pages number</th>
+			<th>Created time</th>
+		</tr>
+	</thead>
+  <tbody>
+  {% for pages in object_list %}
+  <tr>
+    <td>{{pages.url}}</td>
+    <td>{{pages.pages_count}}</td>
+    <td>{{pages.created_at}}</td>
+    <td align="right">
+      <a class="btn btn-secondary btn-sm" href="{% url 'facebook:show_page' pk=pages.pk %}">Show</a>
+      <a class="btn btn-primary btn-sm" href="{% url 'facebook:update' pk=pages.pk %}">Update</a>
+      <a class="btn btn-danger btn-sm" href="{% url 'facebook:delete' pk=pages.pk %}">Delete</a>
+    </td>
+  </tr>
+  {% endfor %}
+</tbody>
+</table>
 {% endblock %}
