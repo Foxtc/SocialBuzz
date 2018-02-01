@@ -37,7 +37,7 @@ This is a Django project to collect data from Facebook. Django is a high-level P
     ```
 8.  Test task. Open a terminal window and run celery worker
     ```
-    celery -A socialbuzz worker -l info
+    celery -A socialbuzz worker -l info -P eventlet
     ```
 9. Test scheduled tasks with Celery Beat. Open another terminal window to run scheduled tasks:
     ```
