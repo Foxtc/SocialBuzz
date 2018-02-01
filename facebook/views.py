@@ -7,7 +7,7 @@ from .forms import FacebookPageForm, FacebookPostForm
 
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from .tasks import collect_page
+from .tasks import collect_page, collect_post
 
 class HomeView(TemplateView):
 	template_name = "home.html"
@@ -50,18 +50,40 @@ class FacebookPageUpdate(UpdateView):
 	form_class = FacebookPageForm
 	template_name = 'show_page.html'
 	success_url = reverse_lazy('facebook:update_page')
-
 	def get_context_data(self, **kwargs):
 		context = super(FacebookPageUpdate, self).get_context_data(**kwargs)
-		update_page = Post.objects.filter(page=self.kwargs.get('pk'))
-		#collect_page(update_page.url)
+		context['posts'] = Post.objects.all()
 		return context
+
+	def get_object(self, queryset=None):
+		if queryset is None:
+			queryset = self.get_queryset()
+		pk = self.kwargs.get(self.pk_url_kwarg, None)
+		if pk is not None:
+			queryset = queryset.filter(pk=pk)
+		obj = queryset.get()
+		collect_page(obj.url)
+		return obj
 
 class FacebookPostUpdate(UpdateView):
 	model = FacebookNewPost
 	form_class = FacebookPostForm
 	template_name = 'show_post.html'
-	#success_url = reverse_lazy('facebook:list_post')
+	success_url = reverse_lazy('facebook:update_post')
+	def get_context_data(self, **kwargs):
+		context = super(FacebookPostUpdate, self).get_context_data(**kwargs)
+		context['posts'] = Comment.objects.all()
+		return context
+
+	def get_object(self, queryset=None):
+		if queryset is None:
+			queryset = self.get_queryset()
+		pk = self.kwargs.get(self.pk_url_kwarg, None)
+		if pk is not None:
+			queryset = queryset.filter(pk=pk)
+		obj = queryset.get()
+		collect_post(obj.url)
+		return obj
 
 class FacebookPageDelete(DeleteView):
 	model = FacebookNewPage

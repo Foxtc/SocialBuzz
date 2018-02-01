@@ -8,7 +8,7 @@ class FacebookPageForm(forms.ModelForm):
 		fields = ['url',]
 		labels = {'url': 'ID/URL',}
 		widgets = {
-			'url': forms.TextInput(attrs={'class':'form-control col-md-9','placeholder':'Page_ID/URL'}),
+			'url': forms.TextInput(attrs={'class':'form-control col-md-9','placeholder':'Page_ID'}),
 			'created_at': forms.SelectDateWidget(attrs={'class':'form-control'}),
 		}
 	def run_task(self):
@@ -20,7 +20,7 @@ class FacebookPostForm(forms.ModelForm):
 		fields = ['url',]
 		labels = {'url': 'ID/URL',}
 		widgets = {
-			'url': forms.TextInput(attrs={'class':'form-control col-md-9','placeholder':'Post_ID/URL'}),
+			'url': forms.TextInput(attrs={'class':'form-control col-md-9','placeholder':'Post_ID'}),
 			'created_at': forms.SelectDateWidget(attrs={'class':'form-control'}),
 		}
 	def run_task(self):
