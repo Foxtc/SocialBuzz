@@ -19,12 +19,12 @@ This is a Django project to collect data from Facebook. Django is a high-level P
     python manage.py runserver
     ```
 6. Download redis. Open and test Redis:
-  ⋅⋅* redis-cli ping
+    ...redis-cli ping
     ```
     $ redis-cli ping
     PONG
     ```
-  ⋅⋅* redis-server
+    ...redis-server
     ```
     $ redis-server
     ```
