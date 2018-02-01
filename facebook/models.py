@@ -36,7 +36,6 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    #['from','from_id','comment','created_time','likes','post_id','original_poster']
     person = models.ForeignKey(Person)
     message = models.TextField(null=True)
     created_time = models.DateTimeField()
