@@ -18,3 +18,27 @@ This is a Django project to collect data from Facebook. Django is a high-level P
     ```
     python manage.py runserver
     ```
+6. Download redis. Open and test Redis:
+  ⋅⋅* redis-cli ping
+    ```
+    $ redis-cli ping
+    PONG
+    ```
+  ⋅⋅* redis-server
+    ```
+    $ redis-server
+    ```
+7. Install Celery + Redis
+    ```
+    pip install celery
+    pip install redis
+    pip install django-celery-beat
+    ```
+8.  Test task. Open a terminal window and run celery worker
+    ```
+    celery -A socialbuzz worker -l info
+    ```
+9. Test scheduled tasks with Celery Beat. Open another terminal window to run scheduled tasks:
+    ```
+    celery -A socialbuzz beat -l info -S django
+    ```
