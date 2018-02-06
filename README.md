@@ -2,7 +2,7 @@ This is a Django project with scheduled tasks to collect data from Facebook. Dja
 This project is written for Python 3
 
 ## Instructions
-1. You need install Django
+1. You need install Django, version 1.9
 2. These application use database tables, so we need to create the tables in the database before we can use them. To do that, run the following command:
     ```
     python manage.py migrate
