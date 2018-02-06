@@ -16,7 +16,7 @@ class Person(models.Model):
     id = models.CharField(max_length=256, primary_key=True)
 
 class Post(models.Model):
-    person = models.ForeignKey(Person)
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
     message = models.TextField(null=True)
     picture = models.URLField(null=True)
     link = models.URLField(null=True)
@@ -32,11 +32,11 @@ class Post(models.Model):
     sad = models.IntegerField()
     angry = models.IntegerField()
     id = models.CharField(max_length=256, primary_key=True)
-    page = models.ForeignKey(FacebookNewPage)
+    page = models.ForeignKey(FacebookNewPage, on_delete=models.CASCADE)
 
 
 class Comment(models.Model):
-    person = models.ForeignKey(Person)
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
     message = models.TextField(null=True)
     created_time = models.DateTimeField()
     like_count = models.IntegerField()
@@ -46,4 +46,4 @@ class Comment(models.Model):
     sad = models.IntegerField()
     angry = models.IntegerField()
     id = models.CharField(max_length=256, primary_key=True)
-    post = models.ForeignKey(FacebookNewPost)
+    post = models.ForeignKey(FacebookNewPost, on_delete=models.CASCADE)
