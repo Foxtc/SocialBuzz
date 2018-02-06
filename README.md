@@ -2,7 +2,10 @@ This is a Django project with scheduled tasks to collect data from Facebook. Dja
 This project is written for Python 3
 
 ## Instructions
-1. You need install Django, version 1.9
+1. You need install dependencies
+    ```
+    pip install -r requirements.txt
+    ```
 2. These application use database tables, so we need to create the tables in the database before we can use them. To do that, run the following command:
     ```
     python manage.py migrate
@@ -30,17 +33,11 @@ This project is written for Python 3
     ```
     $ redis-server
     ```
-7. Install Celery + Redis
-    ```
-    pip install celery
-    pip install redis
-    pip install django-celery-beat
-    ```
-8.  Test task. Open a terminal window and run celery worker
+7.  Test task. Open a terminal window and run celery worker
     ```
     celery -A socialbuzz worker -l info -P eventlet
     ```
-9. Test scheduled tasks with Celery Beat. Open another terminal window to run scheduled tasks:
+8. Test scheduled tasks with Celery Beat. Open another terminal window to run scheduled tasks:
     ```
     celery -A socialbuzz beat -l info -S django
     ```

@@ -1,0 +1,9 @@
+sqlalchemy
+pandas
+anyjson
+django-celery-results
+django==1.9
+redis
+django-celery
+celery
+django-celery-beat
